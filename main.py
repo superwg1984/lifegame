@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-__author__ = 'wanggeng'
+__author__ = 'superewg'
 import random
 import time
 import logging
@@ -17,31 +17,19 @@ def main():
     view.set_tk(root, "life1", "500x500")
     cv = view.get_canvas(root, 'white')
     cv.pack()
-    # xy = 100, 100, 100, 100
-    """
-    for i in range(0, config.X * 5, 5):
-        cv.create_line(i, 0, i, config.X * 5)
-    for i in range(0, config.Y * 5, 5):
-        cv.create_line(0, i, config.Y * 5, i)
-    """
-
-    #a, b = 50, 50
 
     L = config.ALL
-    xs=random.sample(range(0,100), 50)
-    ys=random.sample(range(0,100), 50)
-    for i in range(0,50):
+    xs = random.sample(range(0, 100), 50)
+    ys = random.sample(range(0, 100), 50)
+    for i in range(0, 50):
         lname = str(xs[i]) + str(ys[i])
-        L[lname] = Life(lname, [xs[i], ys[i]], random.randint(0,10))
-    # print(a, b)
-    #lname = str(a) + str(b)
-    #L[lname] = Life(lname, [a, b], 5)
-    # print(l1.getHp()
+        L[lname] = Life(lname, [xs[i], ys[i]], random.randint(0, 10))
+
     lifecolor = ["red", "red", "red", "yellow", "yellow", "yellow", "green", "green", "green", "green", "green"]
     while True:
 
         for i, j in L.items():
-            #print(i)
+            # print(i)
             j.lifeordie(L)
             # logging.info("[%d,%d]lifeHP:%d", i.getXY()[0],i.getXY()[1],i.getHp())
             if j.getHp() >= 10:
@@ -54,11 +42,12 @@ def main():
                 cv.delete(j.getName())
         for i, j in L.items():
             xy = j.getXY()
-            cv.create_rectangle(xy[0] * 5, xy[1] * 5, xy[0] * 5, xy[1] * 5, outline=lifecolor[L[i].getHp()],tags=j.getName())
+            cv.create_rectangle(xy[0] * 5, xy[1] * 5, xy[0] * 5, xy[1] * 5, outline=lifecolor[L[i].getHp()],
+                                tags=j.getName())
             root.update()
             # time.sleep(2)
 
-        logging.info("总细胞数:%d,用时%f",len(L),time.clock())
+        logging.info("总细胞数:%d,用时%f", len(L), time.clock())
     root.mainloop()
 
 
@@ -83,8 +72,8 @@ class Life:
         '''
         ret = []
         mylist = self.round()
-        #print("mylist", mylist)
-        #print("list.key", list.keys())
+        # print("mylist", mylist)
+        # print("list.key", list.keys())
         for i in mylist:
             x, y = i
             if 0 < x < config.X and 0 < y < config.Y:
@@ -133,7 +122,7 @@ class Life:
         for i in list.keys():
             c = c + ret.count(i)
 
-        #logging.info("%s周围细胞数量:%d", self.__name, c)
+        # logging.info("%s周围细胞数量:%d", self.__name, c)
         isLife = False
         if 0 <= c < 4:
             isLife = True
@@ -150,6 +139,7 @@ class Life:
 
     def getXY(self):
         return self.__xy
+
     def getName(self):
         return self.__name
 

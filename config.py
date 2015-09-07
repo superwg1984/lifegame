@@ -1,7 +1,7 @@
 # coding=utf-8
 import logging
 
-__author__ = 'wanggeng'
+__author__ = 'superewg'
 X = 100
 Y = 100
 ALL = {}  # 所有细胞
