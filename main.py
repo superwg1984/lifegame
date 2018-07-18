@@ -26,12 +26,15 @@ def main():
         L[lname] = Life(lname, [xs[i], ys[i]], random.randint(0, 10))
 
     lifecolor = ["red", "red", "red", "yellow", "yellow", "yellow", "green", "green", "green", "green", "green"]
-    while True:
 
-        for i, j in L.items():
-            # print(i)
+    while True:
+        s=time.clock()
+        for i in list(L.keys()):
+            # print("L size:", len(L.keys()))
+            j=L.get(i)
             j.lifeordie(L)
-            # logging.info("[%d,%d]lifeHP:%d", i.getXY()[0],i.getXY()[1],i.getHp())
+
+            # logging.info(f"[{j.getXY()[0]},{j.getXY()[1]}]lifeHP:{j.getHp()}")
             if j.getHp() >= 10:
                 x, y = L[i].addLife(L)
                 lname = str(x) + str(y)
@@ -47,7 +50,7 @@ def main():
             root.update()
             # time.sleep(2)
 
-        logging.info("总细胞数:%d,用时%f", len(L), time.clock())
+        logging.info(f"总细胞数:{len(L)},用时{time.clock()-s}")
     root.mainloop()
 
 
@@ -64,7 +67,7 @@ class Life:
     def die(self):
         del self
 
-    def addLife(self, list):
+    def addLife(self, llist):
         '''
         返回一个可以添加细胞的位置
         :param list:
@@ -73,11 +76,14 @@ class Life:
         ret = []
         mylist = self.round()
         # print("mylist", mylist)
-        # print("list.key", list.keys())
+        # print("list.key", llist.keys())
         for i in mylist:
             x, y = i
+            # print("i:",i)
+
             if 0 < x < config.X and 0 < y < config.Y:
-                c = list.keys().count(i)
+                # print(type(llist))
+                c = list(llist.keys()).count(i)
                 if c == 0:
                     ret.append(i)
         # print(len(ret))
