@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/superwg1984/lifegame.svg?branch=master)](https://travis-ci.org/superwg1984/lifegame)
 # lifegame
 用python写的生命游戏
 规则:
